@@ -1,0 +1,14 @@
+{% extends 'pages/base.html' %}
+{% block content %}
+<div class="uk-container uk-margin-medium">
+    <div class="uk-text-center">
+        <h1 class="uk-text-uppercase uk-text-bold">
+            OOPS!
+        </h1>
+        <p>
+            The page you are looking for might have been removed had its name changed or is temporarily unavailable.
+        </p>
+        <a href="{% url 'home' %}" class="uk-button uk-button-secondary">Go to homepage</a>
+    </div>
+</div>
+{% endblock %}

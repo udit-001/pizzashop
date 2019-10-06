@@ -1,0 +1,76 @@
+{% extends "account/base.html" %}
+{% load static %}
+{% load i18n %}
+{% load account socialaccount %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+
+
+{% get_providers as socialaccount_providers %}
+
+{% load socialaccount %}
+{% providers_media_js %}
+<div class="uk-container uk-margin-medium uk-width-1-3@m uk-width-1-2@s">
+
+  <h2 class="uk-text-center"> Login </h2>
+  {% include 'partials/_alerts.html' %}
+
+  <div uk-grid class="uk-child-width-1-1 uk-grid-small">
+    <div>
+      <a class="uk-button uk-button-primary 2uk-align-center uk-width-expand"
+        href="{% provider_login_url "facebook" method="oauth2" %}" style="background-color: #3b5998;"><span
+          uk-icon="facebook"></span> Log in with Facebook</a>
+    </div>
+    <div>
+      <a class="uk-button uk-button-primary uk-align-center uk-width-expand" href="{% provider_login_url "google" %}"
+        style="background-color: #ea4335;"><span uk-icon="google"></span> Log in with Google</a>
+    </div>
+  </div>
+  <hr class="uk-divider-icon">
+
+  <form class="login uk-form-stacked" method="POST" action="{% url 'account_login' %}">
+    {% csrf_token %}
+    {% for field in form %}
+    {% if 'Remember' in field.label %}
+    <div class="uk-margin">
+      <label>
+        <input class="uk-checkbox" type="checkbox" name="{{ field.name }}" id="{{ field.id_for_label }}">
+        {{ field.label }}
+      </label>
+    </div>
+    {% else %}
+    <div class="uk-margin">
+      <label class="uk-form-label" for="{{ field.id_for_label }}">{{ field.label }}:</label>
+      <div class="uk-inline uk-width-1-1">
+        <span class="uk-form-icon" uk-icon={% if 'mail' in field.label %} "icon: mail"
+          {% elif field.label == 'Password' %} "icon: lock" {% endif %}></span>
+        <input class="uk-input {% if field.errors %}uk-form-danger{% endif %}"
+          type="{{ field.field.widget.input_type }}"
+          placeholder="{% if field.label == 'Password' %}Enter Password{% else %}johndoe@gmail.com{% endif %}"
+          name="{{ field.name }}" id="{{ field.id_for_label }}" {% if field.value %}value="{{ field.value }}"
+          {% endif %} required>
+      </div>
+      {% if field.errors %}
+      {% for error in field.errors %}
+      <span class="uk-text-danger uk-text-small uk-display-block">
+        {{ error }}
+      </span>
+      {% endfor %}
+      {% endif %}
+      {% endif %}
+      {% endfor %}
+      {% if redirect_field_value %}
+      <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+      {% endif %}
+      <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+      <button class="primaryAction uk-button uk-button-primary uk-width-1-2@s uk-width-expand uk-align-center"
+        type="submit">{% trans "Sign In" %}</button>
+  </form>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/alert.js' %}"></script>
+{% endblock %}

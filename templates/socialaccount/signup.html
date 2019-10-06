@@ -1,0 +1,37 @@
+{% extends "socialaccount/base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% trans "Signup" %}{% endblock %}
+
+{% block content %}
+<div class="uk-container uk-margin-medium uk-width-1-3@m uk-width-1-2@s">
+  <h2 class="uk-text-center">{% trans "Sign Up" %}</h2>
+  {% include 'partials/_alerts.html' %}
+
+  <p>{% blocktrans with provider_name=account.get_provider.name site_name=site.name %}You are about to use your
+    {{provider_name}} account to login to
+    {{site_name}}. As a final step, please complete the following form:{% endblocktrans %}</p>
+
+  <form class="signup uk-form-stacked" id="signup_form" method="post" action="{% url 'socialaccount_signup' %}">
+    {% csrf_token %}
+    {% for field in form %}
+    <div class="uk-margin">
+      <label class="uk-form-label" for="{{ field.name }}">{{ field.label }} : </label>
+      <div class="uk-inline uk-width-1-1">
+        <span class="uk-form-icon" uk-icon="icon: mail"></span>
+        <input class="uk-input" type="email" placeholder="Enter {{ field.label }}" name="{{ field.name }}"
+          id="id_{{field.name}}" value="{{ field.value }}">
+      </div>
+    </div>
+    {% endfor %}
+    {% if redirect_field_value %}
+    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+    {% endif %}
+    <button class="uk-button-primary uk-width-expand uk-button-small uk-width-1-2@s uk-align-center" type="submit">Sign
+      Up
+      &raquo;</button>
+  </form>
+
+</div>
+{% endblock %}

@@ -1,0 +1,91 @@
+{% extends "pages/base.html" %}
+
+{% load static %}
+
+{% block title %}
+Manage Addresses
+{% endblock %}
+
+{% block content %}
+<div class="uk-container uk-margin-medium uk-width-1-2@l uk-width-2-3@m uk-width-1-1@s">
+    <h2 class="uk-text-center">Shipping Addresses</h2>
+    {% include 'partials/_alerts.html' %}
+
+    {% if addresses %}
+    <p class="uk-text-center">The following shipping addresses are associated with your account:</p>
+
+    <form action="{% url 'address_remove' %}" class="address_list" method="POST">
+        {% csrf_token %}
+        <table class="uk-table uk-table-divider uk-table-small uk-table-hover uk-table-middle">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>
+                        Address
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for address in addresses %}
+                <tr>
+                    <td>
+                        <input class="uk-radio" type="radio" name="address" value="{{ address.id }}">
+                    </td>
+                    <td>
+                        <span class=" uk-display-block"><b>{{ address.address_name }}</b></span>
+                        <label for="address">
+                            {{ address.get_formatted_address }}
+                        </label>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+
+        <div class="buttonHolder uk-flex uk-flex-wrap uk-flex-center">
+            <a class="uk-button uk-button-small uk-button-secondary uk-margin-bottom" href="{% url 'address_add' %}">
+                Add address
+            </a>
+            <button
+                class="primaryAction uk-button uk-button-danger uk-button-small uk-margin-bottom uk-margin-small-left"
+                type="submit" id="action_remove">Remove</button>
+        </div>
+    </form>
+    {% else %}
+
+    <div class="uk-text-center">
+        <p><strong>Warning:</strong>
+            You currently do not have any shipping address set up. You should really add a shipping address so you can
+            start
+            placing orders.
+        </p>
+
+        <a class="uk-button uk-button-small uk-button-secondary" href="{% url 'address_add' %}">
+            Add address
+        </a>
+    </div>
+
+    {% endif %}
+
+
+    <h3 class="uk-text-center"></h3>
+</div>
+{% endblock %}
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelector('#action_remove').onclick = function (e) {
+            e.preventDefault();
+            UIkit.modal.confirm(
+                `Are you sure you want to remove the address <b>${document.querySelector('[name=address]:checked').parentElement.nextElementSibling.children[1].innerText}</b>?`
+            ).then(function () {
+                    document.forms[0].submit();
+                },
+                function () {
+                    console.log('Rejected.');
+                });
+        }
+    });
+</script>
+{% endblock %}

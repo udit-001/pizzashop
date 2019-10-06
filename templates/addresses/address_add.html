@@ -1,0 +1,327 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+
+{% block title %}
+Add Address
+{% endblock %}
+
+{% block head %}
+<style>
+    .pac-icon {
+        display: none;
+    }
+
+    .pac-item-query {
+        display: block;
+    }
+
+    .pac-item-query,
+    .pac-item {
+        font-size: 14px;
+    }
+
+    .pac-item {
+        margin: 0;
+        padding: 0 8px;
+    }
+</style>
+{% endblock %}
+{% block content %}
+<div class="uk-container uk-margin-medium uk-width-1-3@m uk-width-1-2@s">
+    <h2 class="uk-text-center">
+        Add a new address
+    </h2>
+    {% include 'partials/_alerts.html' %}
+    <button class="uk-button uk-width-expand" id="locate">
+        <span uk-icon="icon: location; ratio: 0.8"></span> Use my current location
+    </button>
+    <hr>
+    <form method="POST" class="uk-form-stacked">
+        {% csrf_token %}
+        {% for field in address_form %}
+        {% if 'address_line1' in field.id_for_label or 'address_line2' in field.id_for_label or 'postal_code' in field.id_for_label %}
+        {% if 'address_line2' in field.id_for_label %}
+        <div class="uk-margin">
+            <label class="uk-form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+            <div class="uk-inline uk-width-1-1">
+                <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: search; ratio: 0.9"></span>
+                <input class="uk-input {% if field.errors %}uk-form-danger{% endif %}" type="text"
+                    maxlength="{{ field.field.max_length }}" placeholder="{{ field.field.widget.attrs.placeholder }}"
+                    id="{{ field.id_for_label }}" name="{{ field.name }}" {% if field.value %}value="{{ field.value }}"
+                    {% endif %} required>
+            </div>
+            {% if field.errors %}
+            {% for error in field.errors %}
+            <span class="uk-text-danger uk-text-small uk-display-block">
+                {{ error }}
+            </span>
+            {% endfor %}
+            {% endif %}
+        </div>
+        {% else %}
+        <div class="uk-margin">
+            <label class="uk-form-label {% if field.name == 'landmark' %}uk-text-muted{% endif %}"
+                for="{{ field.id_for_label }}">{{ field.label }}{% if field.name == 'landmark' %}
+                (Optional){% endif %}</label>
+            <div class="uk-form-controls">
+                <input class="uk-input {% if field.errors %}uk-form-danger{% endif %}"
+                    type="{{ field.field.widget.input_type }}"
+                    {% if 'postal_code' in field.id_for_label %}pattern="{{ field.field.widget.attrs.pattern }}" min=0
+                    {% endif %} maxlength="{{ field.field.max_length }}"
+                    placeholder="{{ field.field.widget.attrs.placeholder }}" id="{{ field.id_for_label }}"
+                    name="{{ field.name }}" {% if field.value %}value="{{ field.value }}" {% endif %} required>
+                {% if field.errors %}
+                {% for error in field.errors %}
+                <span class="uk-text-danger uk-text-small uk-display-block">
+                    {{ error }}
+                </span>
+                {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+        {% endif %}
+        {% endfor %}
+        <div uk-grid>
+            {% for field in address_form %}
+            {% if 'city' in field.id_for_label or 'state' in field.id_for_label %}
+            {% if 'city' in field.id_for_label %}
+            <div class="uk-width-1-2">
+                <label class="uk-form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                <div class="uk-inline">
+                    <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: search; ratio: 0.9"></span>
+                    <input class="uk-input {% if field.errors %}uk-form-danger{% endif %}" type="text"
+                        maxlength="{{ field.field.max_length }}" name="{{ field.name }}" placeholder="Enter City"
+                        id="{{ field.id_for_label }}" {% if field.value %}value="{{ field.value }}" {% endif %}
+                        required>
+                </div>
+                {% if field.errors %}
+                {% for error in field.errors %}
+                <span class="uk-text-danger uk-text-small uk-display-block">
+                    {{ error }}
+                </span>
+                {% endfor %}
+                {% endif %}
+            </div>
+            {% else %}
+            <div class="uk-width-1-2">
+                <label class="uk-form-label">{{ field.label }}</label>
+                <div class="uk-form-controls">
+                    <select name="{{ field.name }}" id="{{ field.id_for_label }}"
+                        class="uk-select {% if field.errors %}uk-form-danger{% endif %}" required>
+                        <option value="" disabled selected hidden>Select State</option>
+                        <optgroup label="Select State">
+                            {% for state in field.field.widget.choices %}
+                            <option value="{{ state.0 }}">{{ state.1 }}</option>
+                            {% endfor %}
+                        </optgroup>
+                    </select>
+                </div>
+            </div>
+            {% endif %}
+            {% endif %}
+            {% endfor %}
+        </div>
+
+        <div class="uk-margin">
+            <label class="uk-form-label uk-text-muted"
+                for="{{ address_form.landmark.id_for_label }}">{{ address_form.landmark.label }} (Optional):</label>
+            <div class="uk-form-controls">
+                <input class="uk-input {% if address_form.landmark.errors %}uk-form-danger{% endif %}" type="text"
+                    maxlength="{{ address_form.landmark.field.max_length }}"
+                    placeholder="{{ address_form.landmark.field.widget.attrs.placeholder }}"
+                    id="{{ address_form.landmark.id_for_label }}" name="{{ address_form.landmark.name }}"
+                    {% if address_form.landmark.value %}value="{{ address_form.landmark.value }}" {% endif %}>
+            </div>
+            {% if address_form.landmark.errors %}
+            {% for error in address_form.landmark.errors %}
+            <span class="uk-text-danger uk-text-small uk-display-block">
+                {{ error }}
+            </span>
+            {% endfor %}
+            {% endif %}
+        </div>
+        <hr>
+        <label class="uk-form-label" for="form-stacked-text">Address Type</label>
+        <ul class="uk-list">
+            {% for choice in  address_form.address_name.field.widget.choices %}
+            <li>
+                <label><input class="uk-radio" type="radio" value="{{ choice.0 }}" name="address_type" required>
+                    {{ choice.1 }}</label>
+            </li>
+            {% endfor %}
+        </ul>
+        <div class="uk-margin uk-hidden" id="other_text">
+            <label class="uk-form-label" for="id_address_name">Save as:</label>
+            <input class="uk-input" type="text" placeholder="e.g.: Dad's Place, John's Home" name="address_name"
+                max_length="{{ address_form.address_name.field.max_length }}" id="id_address_name">
+        </div>
+        {% if address_form.address_name.errors %}
+        {% for error in address_form.address_name.errors %}
+        <span class="uk-text-danger uk-text-small uk-display-block">
+            {{ error }}
+        </span>
+        {% endfor %}
+        <br>
+        {% endif %}
+        <button class="uk-button uk-button-primary uk-width-expand" type="submit">Save</button>
+        {% if redirect_field_value %}
+        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+        {% endif %}
+    </form>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="{% static 'js/alert.js' %}"></script>
+<script type="text/javascript"
+    src="https://maps.google.com/maps/api/js?key=AIzaSyCPNm1C3d-T9z8rd_dj_kjsCpxeWpahOEw&libraries=places,geocode">
+</script>
+<script>
+    var latlng;
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('[name=address_type]').forEach(function (e) {
+
+            e.addEventListener('change', function () {
+                if (this.value == "Other") {
+                    document.querySelector("#other_text").classList.remove("uk-hidden");
+                    document.querySelector('[name=address_name]').setAttribute('value', '');
+                } else {
+                    document.querySelector('[name=address_name]').setAttribute('value', this
+                        .value);
+                    document.querySelector("#other_text").classList.add("uk-hidden");
+                }
+            });
+        });
+
+        var city_autocomplete = document.getElementById('id_city');
+        var sublocality_autocomplete = document.getElementById('id_address_line2');
+        var cit_options = {
+            types: ['(cities)'],
+            componentRestrictions: {
+                country: 'in'
+            }
+        }
+        var sub_options = {
+            //types: ['address],
+            componentRestrictions: {
+                country: 'in'
+            }
+        }
+
+        var cit_autocomplete = new google.maps.places.Autocomplete(city_autocomplete, cit_options);
+        cit_autocomplete.setFields(['address_components']);
+
+        cit_autocomplete.addListener('place_changed', cit_onPlaceChanged);
+
+        var sub_autocomplete = new google.maps.places.Autocomplete(sublocality_autocomplete, sub_options);
+
+        function cit_onPlaceChanged(results) {
+            var place = cit_autocomplete.getPlace();
+            console.log(place);
+            for (i in place.address_components) {
+                if (place.address_components[i].types.includes("locality")) {
+                    document.querySelector('#id_city').value = place.address_components[i].long_name;
+                } else if (place.address_components[i].types.includes("administrative_area_level_1")) {
+                    document.querySelector(`option[value*="${place
+                        .address_components[i].short_name}"]`).selected = true;
+                } else if (place.address_components[i].types.includes('postal_code')) {
+                    document.querySelector('#id_postal_code').value = place.address_components[i].long_name;
+                }
+            }
+        }
+
+        sub_autocomplete.setFields(['address_components']);
+        sub_autocomplete.addListener('place_changed', sub_onPlaceChanged);
+
+        function sub_onPlaceChanged(results) {
+            var place = sub_autocomplete.getPlace();
+            console.log(place);
+            locality = '';
+            for (i in place.address_components) {
+                if (place.address_components[i].types.includes("locality")) {
+                    document.querySelector('#id_city').value = place.address_components[i].long_name;
+                } else if (place.address_components[i].types.includes("administrative_area_level_1")) {
+                    document.querySelector(`option[value*="${place
+                        .address_components[i].short_name}"]`).selected = true;
+                } else if (place.address_components[i].types.includes("street_number") || place
+                    .address_components[i].types.includes("sublocality_level_3") || place
+                    .address_components[i].types.includes("sublocality_level_2") || place
+                    .address_components[i].types.includes("sublocality_level_1")) {
+                    locality += place.address_components[i].long_name + ', ';
+                } else if (place.address_components[i].types.includes('postal_code')) {
+                    document.querySelector('#id_postal_code').value = place.address_components[i].long_name;
+                }
+            }
+            locality = locality.replace(/(,\ $)/g, "");
+            document.querySelector('#id_address_line2').value = locality;
+        }
+
+        document.querySelector('#locate').addEventListener('click', function () {
+            navigator.geolocation.getCurrentPosition(function (pos) {
+                latlng = {
+                    lat: parseFloat(pos.coords.latitude),
+                    lng: parseFloat(pos.coords.longitude)
+                };
+                locate(latlng);
+            })
+        })
+    })
+
+    function locate(latlng) {
+        var geocoder = new google.maps.Geocoder();
+        var result = undefined;
+
+        if (geocoder) {
+            geocoder.geocode({
+                location: latlng
+            }, function (results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    for (i in results) {
+                        if (results[i].types.includes("sublocality_level_3")) {
+                            console.log(results[i]);
+                            result = results[i];
+                            UIkit.modal.confirm('<h4>Update with these details?</h4><p>' + results[i]
+                                .formatted_address + '</p>').then(function () {
+                                console.log('Confirmed!');
+                                locality = '';
+                                for (j in result.address_components) {
+                                    if (result.address_components[j].types.includes('postal_code')) {
+                                        console.log(result.address_components[j]);
+                                        document.querySelector('#id_postal_code').value = result
+                                            .address_components[j].long_name;
+                                    } else if (result.address_components[j].types.includes(
+                                            "administrative_area_level_1")) {
+                                        document.querySelector(`option[value*="${result
+                                            .address_components[j].short_name}"]`).selected = true;
+                                        //document.querySelector('#state').value
+                                    } else if (result.address_components[j].types.includes(
+                                            "administrative_area_level_2")) {
+                                        document.querySelector('#id_city').value = result
+                                            .address_components[j].long_name;
+                                    } else if (result.address_components[j].types.includes(
+                                            "sublocality_level_1") || result.address_components[j].types
+                                        .includes(
+                                            "sublocality_level_2") ||
+                                        result.address_components[j].types.includes(
+                                            "sublocality_level_3") ||
+                                        result.address_components[j].types.includes("neighborhood")) {
+                                        locality += result
+                                            .address_components[j].long_name + ', ';
+                                    }
+
+                                }
+                                locality = locality.replace(/(,\ $)/g, "");
+                                document.querySelector('#id_address_line2').value = locality;
+                            }, function () {
+                                console.log('Rejected.')
+                            });
+                        }
+                    }
+                } else {
+                    console.log("Geocoding failed: " + status);
+                }
+            });
+        }
+    }
+</script>
+{% endblock %}

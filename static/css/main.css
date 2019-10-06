@@ -1,0 +1,28 @@
+#tabs {
+    flex-wrap: nowrap;
+    overflow: auto;
+    max-width: 10000px;
+}
+
+.uk-tab::before {
+    border-bottom: none;
+}
+
+.uk-tab {
+    margin-left: 2px;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.img-dim {
+    filter: brightness(50%);
+}
+
+.p-margin-0 {
+    margin: 0;
+}
+
+@media (max-width: 400px) {
+    .platter-resize {
+        font-size: 14px;
+    }
+}

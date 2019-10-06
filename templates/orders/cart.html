@@ -1,0 +1,276 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+
+{% block title %}
+Cart
+{% endblock %}
+
+{% block head %}
+<style>
+    td.uk-text-truncate {
+        user-select: none;
+    }
+
+    @media (max-width: 640px) {
+        .item {
+            font-size: 0.97em;
+        }
+    }
+
+    .StripeElement {
+        box-sizing: border-box;
+
+        height: 40px;
+
+        padding: 10px 12px;
+
+        border: 1px solid transparent;
+        background-color: white;
+
+        box-shadow: 0 1px 3px 0 #e6ebf1;
+        -webkit-transition: box-shadow 150ms ease;
+        transition: box-shadow 150ms ease;
+    }
+
+    .StripeElement--focus {
+        box-shadow: 0 1px 3px 0 #cfd7df;
+    }
+
+    .StripeElement--invalid {
+        border-color: #fa755a;
+    }
+
+    .StripeElement--webkit-autofill {
+        background-color: #fefde5 !important;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="uk-container uk-width-1-2@s uk-width-1-1 uk-margin-small">
+    {% include 'partials/_alerts.html' %}
+</div>
+<div class="uk-container uk-margin-medium">
+    <h2 class="uk-text-center"> My Cart </h2>
+    {% if cart %}
+    <div class="uk-card uk-card-default uk-width-1-2@xl">
+        <div class="uk-card-header">
+            <div class="uk-grid-small uk-flex-middle" uk-grid>
+                <div class="uk-width-auto">
+                    <span uk-icon="icon: cart; ratio: 1.8"></span>
+                </div>
+                <div class="uk-width-expand">
+                    <h3 class="uk-card-title uk-margin-remove-bottom">Your Cart</h3>
+                    <p class="uk-text-meta uk-margin-remove-top"><time
+                            datetime="2016-04-01T19:00">{{ cart.started_date }}</time>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="uk-card-header">
+            <div class="uk-flex-middle uk-flex uk-flex-wrap">
+                <div class="uk-margin-small-right">
+                    <b>Deliver to:</b>
+                </div>
+                <div class="uk-width-1-1@s uk-width-1-2@m">
+                    <form action="{% url 'orders_cart' %}" id="cart" method="POST">
+                        {% csrf_token %}
+                        <select name="address" class="uk-select" required>
+                            <option value="" selected disabled hidden>Select Address</option>
+                            <optgroup label="Select Address">
+                                {% for address in addresses %}
+                                <option value="{{ address.id }}" {% if addresses|length == 1 %}selected{% endif %}>
+                                    {{ address.address_name }}
+                                    ({{ address.get_formatted_address | truncatewords:6 }})
+                                </option>
+                                {% endfor %}
+                            </optgroup>
+                        </select>
+                        <input type="hidden" name="order" value={{ cart.id }}>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="uk-card-body">
+            <table class="uk-table uk-table-divider uk-table-small uk-table-middle uk-table-justify">
+                <thead>
+                    <tr>
+                        <th>Item Name</th>
+                        <th class="uk-table-shrink uk-visible@s">Quantity</th>
+                        <th class="uk-table-shrink">Price</th>
+                        <th class="uk-table-shrink">Remove</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in cart.items.all %}
+                    <tr>
+                        <td class="uk-width-auto item">{{ item.name }} <span
+                                class="uk-hidden@s">(x{{ item.quantity }})</span></td>
+                        <td class="uk-text-center uk-visible@s">{{ item.quantity }}</td>
+                        <td class="item">${{ item.price }}</td>
+                        <td class="uk-text-center"><button name="item" class="uk-icon-button uk-button-danger remove"
+                                uk-icon="trash" value="{{ item.id }}"></button></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="uk-card-footer">
+            <div class="uk-container uk-flex uk-flex-between uk-flex-middle">
+                <span>
+                    Total : ${{ cart.get_order_total }} ({{ cart.get_items_count }} items)
+                </span>
+                <button class="uk-button uk-button-secondary uk-button-small" id="order">Place Order</b>
+            </div>
+            <form action="{% url 'orders_cart' %}" id="remove" method="POST">
+                {% csrf_token %}
+                <input type="hidden" id="trash" name="remove">
+                <input type="hidden" name="order_id" value={{ cart.id }}>
+            </form>
+        </div>
+        <div class="uk-card-footer uk-animation-scale-up uk-transform-origin-top-center uk-hidden" id="payment-card">
+            <form method="POST" id="payment-form">
+                {% csrf_token %}
+                <div class="uk-flex-middle uk-margin-bottom uk-grid-small" uk-grid>
+                    <div class="uk-width-4-5@m">
+                        <label class="uk-form-label" for="card-element">
+                            Credit or debit card
+                        </label>
+                        <div id="card-element">
+                        </div>
+
+                        <div id="card-errors" class="uk-text-danger uk-text-small"></div>
+                    </div>
+                    <input type="hidden" name="address">
+                    <input type="hidden" name="order" value="{{ cart.id }}">
+                    <div class="uk-width-1-5@m uk-margin-top">
+                        <button class="uk-button uk-button-danger uk-button-small">Submit
+                            Payment</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    {% else %}
+    <div class="uk-text-center uk-margin-small">
+        <p>
+            <span uk-icon="icon: cart; ratio: 1.2"></span> Your shopping is empty
+        </p>
+        <div class="uk-grid-small uk-flex-center" uk-grid>
+            <div>
+                <a class="uk-button uk-button-small uk-button-secondary" href="{% url 'orders_place' %}">
+                    Continue shopping
+                </a>
+            </div>
+            <div>
+                <a class="uk-button uk-button-small uk-button-secondary" href="{% url 'orders_list' %}">
+                    Check Orders
+                </a>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    <br><br>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/alert.js' %}"></script>
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.remove').forEach(function (e) {
+            e.onclick = function () {
+                UIkit.modal.confirm(
+                    `Are you sure you want to remove <b>${this.parentElement.parentElement.querySelector('.uk-width-auto').innerText}</b> from your cart?`
+                ).then(
+                    function () {
+                        document.getElementById('trash').value = e.value;
+                        document.getElementById('remove').submit();
+                    },
+                    function () {
+                        console.log('Rejected.');
+                    });
+            }
+        });
+        document.querySelector('#order').onclick = function () {
+            if (document.querySelector('[name=address]').selectedIndex == "0") {
+                UIkit.modal.alert('Please select an address first!').then(function () {
+                    console.log('Alert closed.')
+                });
+            } else {
+                document.querySelector("#payment-card").classList.remove('uk-hidden');
+                document.querySelector('input[name=address]').value = document.querySelector(
+                    '[name=address]').value;
+            }
+        }
+        var stripe = Stripe('pk_test_ggAfMV9DQjLheAt74DJdB9HI00jeXTOuQi');
+
+        var elements = stripe.elements();
+
+        var style = {
+            base: {
+                color: '#32325d',
+                fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+                fontSmoothing: 'antialiased',
+                fontSize: '16px',
+                '::placeholder': {
+                    color: '#aab7c4'
+                }
+            },
+            invalid: {
+                color: '#fa755a',
+                iconColor: '#fa755a'
+            }
+        };
+
+        var card = elements.create('card', {
+            hidePostalCode: true,
+            style: style
+        });
+
+
+        card.mount('#card-element');
+
+        card.addEventListener('change', function (event) {
+            var displayError = document.getElementById('card-errors');
+            if (event.error) {
+                displayError.textContent = event.error.message;
+            } else {
+                displayError.textContent = '';
+            }
+        });
+
+
+        var form = document.getElementById('payment-form');
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            UIkit.modal.confirm('Are you sure you want to place the order?').then(function () {
+                    stripe.createToken(card).then(function (result) {
+                        if (result.error) {
+                            var errorElement = document.getElementById('card-errors');
+                            errorElement.textContent = result.error.message;
+                        } else {
+                            stripeTokenHandler(result.token);
+                        }
+                    });
+                },
+                function () {
+                    console.log('Rejected.');
+                });
+        });
+
+        function stripeTokenHandler(token) {
+            var form = document.getElementById('payment-form');
+            var hiddenInput = document.createElement('input');
+            hiddenInput.setAttribute('type', 'hidden');
+            hiddenInput.setAttribute('name', 'stripeToken');
+            hiddenInput.setAttribute('value', token.id);
+            form.appendChild(hiddenInput);
+
+            form.submit();
+        }
+    });
+</script>
+{% endblock %}

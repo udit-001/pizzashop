@@ -1,0 +1,61 @@
+<div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky">
+    <nav class="uk-navbar-container" uk-navbar="mode: click">
+        <div class="uk-navbar-left uk-hidden@s" id="toggle">
+            <a class="uk-navbar-toggle" uk-navbar-toggle-icon href="javascript:void(0);"></a>
+        </div>
+        <div class="uk-navbar-left">
+            <ul class="uk-navbar-nav uk-visible@s" uk-scrollspy-nav="cls: uk-active;closest: li">
+                <a class="uk-navbar-item uk-logo" href="{% url 'home' %}">Pizzitalia</a>
+                <li {% if '/' == request.path %} class="uk-active" {% else %} {% endif %}><a
+                        href="{% url 'home' %}">Home</a></li>
+                <li {% if 'place' in request.path %} class="uk-active" {% else %} {% endif %}><a
+                        href="{% url 'orders_place' %}">Order</a></li>
+            </ul>
+        </div>
+        <div class="uk-navbar-center uk-hidden@s">
+            <a href="{% url 'home' %}" class="uk-navbar-item uk-logo">
+                Pizzitalia
+            </a>
+        </div>
+        <div class="uk-navbar-right uk-visible@s">
+            <ul class="uk-navbar-nav">
+                {% if user.is_authenticated %}
+                <li {% if 'cart' in request.path %} class="uk-active" {% else %} {% endif %}><a
+                        href="{% url 'orders_cart' %}">Cart ({{ request.session.cart }})</a></li>
+                <li>
+                    <a href="#"><span uk-icon="icon: user"></span> {{ user.first_name }}</a></a>
+                    <div class="uk-navbar-dropdown">
+                        <ul class="uk-nav uk-navbar-dropdown-nav">
+                            <li {% if 'my-orders' in request.path %} class="uk-active" {% else %} {% endif %}><a
+                                    href="{% url 'orders_list' %}">My Orders</a></li>
+                            <li {% if 'profile' in request.path %} class="uk-active" {% else %} {% endif %}><a
+                                    href="{% url 'profile' %}">My Profile</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li {% if 'logout' in request.path %} class="uk-active" {% else %} {% endif %}><a
+                        href="{% url 'account_logout' %}"><span uk-icon="icon: sign-out"></span> LogOut</a></li>
+
+                {% else %}
+                <li {% if 'signup' in request.path %} class="uk-active" {% else %} {% endif %}><a
+                        href="{% url 'account_signup' %}"><span uk-icon="icon: user"></span> Sign up</a></li>
+                <li {% if 'login' in request.path %} class="uk-active" {% else %} {% endif %}><a
+                        href="{% url 'account_login' %}"><span uk-icon="icon: sign-in"></span> Login</a></li>
+                {% endif %}
+            </ul>
+        </div>
+        {% if user.is_authenticated %}
+        <div class="uk-navbar-right uk-hidden@s uk-margin-small-right">
+            <div class="uk-inline uk-margin-small-right">
+                <a uk-icon="icon: cart;ratio: 1.2" href="{% url 'orders_cart' %}"></a>
+                {% if request.session.cart %}
+                <div
+                    class="uk-position-small uk-position-bottom-left uk-position-z-index uk-position-absolute uk-badge">
+                    {{ request.session.cart }}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+    </nav>
+</div>

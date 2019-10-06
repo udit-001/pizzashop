@@ -1,0 +1,51 @@
+<div id="offcanvas-nav-primary" uk-offcanvas>
+        <div class="uk-offcanvas-bar uk-flex uk-text-center uk-flex-column">
+                <button type="button" class="uk-close-large  uk-offcanvas-close" uk-close></button>
+                <ul class="uk-nav uk-nav-primary uk-nav-center uk-margin-auto-vertical" uk-nav>
+                        <li {% if '/' == request.path %} class="uk-active" {% else %} {% endif %}><a
+                                        href="{% url 'home' %}">Home</a></li>
+                        <li {% if 'place' in request.path %} class="uk-active" {% else %} {% endif %}><a
+                                        href="{% url 'orders_place' %}">Order</a></li>
+                        {% if user.is_authenticated %}
+                        <li {% if 'cart' in request.path %} class="uk-active" {% else %} {% endif %}><a
+                                        href="{% url 'orders_cart' %}">Cart
+                                        ({{ request.session.cart }})</a></li>
+                        <li {% if 'my-orders' in request.path %} class="uk-active" {% else %} {% endif %}><a
+                                        href="{% url 'orders_list' %}">My Orders</a></li>
+                        <li {% if 'profile' in request.path %} class="uk-active" {% else %} {% endif %}><a
+                                        href="{% url 'profile' %}">My Profile</a></li>
+                        <li {% if 'logout' in request.path %} class="uk-active" {% else %} {% endif %}><a
+                                        href="{% url 'account_logout' %}"><span uk-icon="icon: sign-out"></span>
+                                        Logout</a></li>
+                        {% else %}
+                        <li {% if 'register' in request.path %} class="uk-active" {% else %} {% endif %}><a
+                                        href="{% url 'account_signup' %}"><span uk-icon="icon: user"></span>
+                                        Register</a></li>
+                        <li {% if 'login' in request.path %} class="uk-active" {% else %} {% endif %}><a
+                                        href="{% url 'account_login' %}"><span uk-icon="icon: sign-in"></span> Login</a>
+                        </li>
+                        {% endif %}
+                </ul>
+                <div>
+                        <div class="uk-grid-small uk-child-width-auto uk-flex-inline uk-grid" uk-grid="">
+                                <div class="uk-first-column">
+                                        <a class="uk-icon-button uk-icon"
+                                                href="https://www.instagram.com/pinocchiospizza1/"
+                                                uk-icon="icon: instagram"></a>
+                                </div>
+                                <div>
+                                        <a class="uk-icon-button uk-icon" href="https://twitter.com/PinocchiosPizz"
+                                                uk-icon="icon: twitter"></a>
+                                </div>
+                                <div>
+                                        <a class="uk-icon-button uk-icon" href="mailto:pinocchiospizza1@gmail.com"
+                                                uk-icon="icon: mail"></a>
+                                </div>
+                                <div>
+                                        <a class="uk-icon-button uk-icon" href="tel:617-876-4897"
+                                                uk-icon="icon: receiver"></a>
+                                </div>
+                        </div>
+                </div>
+        </div>
+</div>

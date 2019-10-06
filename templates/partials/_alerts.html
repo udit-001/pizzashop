@@ -1,0 +1,19 @@
+{% if messages %}
+{% for message in messages %}
+<div class="uk-alert-{{ message.tags }}" uk-alert>
+    <a class="uk-alert-close" uk-close></a>
+    <p>
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+        Error: {{ message }}{% else %}{{ message.tags | title }}: {{ message }}{% endif %}
+    </p>
+</div>
+{% endfor %}
+{% endif %}
+{% if form.non_field_errors %}
+<div class="uk-alert-danger" uk-alert>
+    <a class="uk-alert-close" uk-close></a>
+    <p>
+        {{ form.non_field_errors.0 }}
+    </p>
+</div>
+{% endif %}

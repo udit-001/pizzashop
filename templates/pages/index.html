@@ -1,0 +1,352 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+
+{% block head %}
+<meta name="google-site-verification" content="FlCwJZNgSwFpgvC0E3uEjVo1v5UKSuQ7VdqpTYZn0xw" />
+<link rel="stylesheet" href="{% static 'css/main.css' %}">
+{% endblock %}
+
+{% block content %}
+<!-- Hero image starts here -->
+<div class="uk-cover-container">
+    <canvas width="400" height="420"></canvas>
+    <img src="{% static 'images/hero-pizza.jpg' %}" alt="" uk-cover class="img-dim">
+    <div class="uk-width-1-2@m uk-text-center uk-margin-auto uk-margin-auto-vertical">
+        <div class="uk-position-center">
+            <h1 uk-parallax="y: -120" class="uk-light">The True Italian.</h1>
+            <a href="{% url 'orders_place' %}" uk-parallax="y: -140" class="uk-button uk-button-danger uk-button-large">
+                Order Now
+            </a>
+        </div>
+    </div>
+</div>
+<!-- Hero Image ends here -->
+
+<!-- 5 Column Section -->
+<div class="uk-section uk-section-default">
+    <div class="uk-container">
+
+        <h3 class="uk-text-center">Our Offerings</h3>
+
+        <div uk-slider="clsActivated: uk-transition-active; center: true; autoplay: true; index: 2">
+            <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1">
+
+                <ul class="uk-slider-items uk-flex-middle uk-grid">
+                    <li class="uk-width-medium">
+                        <div class="uk-panel">
+                            <div class="uk-cover-container">
+                                <canvas width="" height="230px"></canvas>
+                                <img src="{% static 'images/carousel-salad.jpg' %}" alt="" uk-cover>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="uk-width-medium">
+                        <div class="uk-panel">
+                            <div class="uk-cover-container">
+                                <canvas width="" height="230px"></canvas>
+                                <img src="{% static 'images/carousel-pasta.jpg' %}" alt="" uk-cover>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="uk-width-medium">
+                        <div class="uk-panel">
+                            <div class="uk-cover-container">
+                                <canvas width="" height="230px"></canvas>
+                                <img src="{% static 'images/carousel-reg_pizza.jpg' %}" alt="" uk-cover>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="uk-width-medium">
+                        <div class="uk-panel">
+                            <div class="uk-cover-container">
+                                <canvas width="" height="230px"></canvas>
+                                <img src="{% static 'images/carousel-sic_pizza.jpg' %}" alt="" uk-cover>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="uk-width-medium">
+                        <div class="uk-panel">
+                            <div class="uk-cover-container">
+                                <canvas width="" height="230px"></canvas>
+                                <img src="{% static 'images/carousel-platter.jpg' %}" alt="" uk-cover>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="uk-width-medium">
+                        <div class="uk-panel">
+                            <div class="uk-cover-container">
+                                <canvas width="" height="230px"></canvas>
+                                <img src="{% static 'images/carousel-sub.jpg' %}" alt="" uk-cover>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+
+                <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous
+                    uk-slider-item="previous"></a>
+                <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next
+                    uk-slider-item="next"></a>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- 5 Column Section ends here -->
+
+<!-- Restaurant Menu Starts here -->
+<div class="uk-section uk-section-muted" uk-scrollspy="cls:uk-animation-slide-left">
+    <div class="uk-container">
+        <h3 class="uk-text-center">Our Menu</h3>
+        <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1"
+            uk-slider="sets: true; draggable: false;" id="menu-slider">
+
+            <ul class="uk-slider-items uk-child-width-1">
+                <li>
+                    <div class="uk-cover-container">
+                        <canvas width="" height="150px"></canvas>
+                        <img src="{% static 'images/slider-reg_pizza.jpg' %}" alt="" class="img-dim" uk-cover>
+                        <div class="uk-position-center uk-panel">
+                            <h1>Regular Pizza</h1>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="uk-cover-container">
+                        <canvas width="" height="150px"></canvas>
+                        <img src="{% static 'images/slider-sic_pizza.jpg' %}" alt="" class="img-dim" uk-cover>
+                        <div class="uk-position-center uk-panel">
+                            <h1>Sicilian Pizza</h1>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="uk-cover-container">
+                        <canvas width="" height="150px"></canvas>
+                        <img src="{% static 'images/slider-sub.jpg' %}" alt="" class="img-dim" uk-cover>
+                        <div class="uk-position-center uk-panel">
+                            <h1>Subs</h1>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="uk-cover-container">
+                        <canvas width="" height="150px"></canvas>
+                        <img src="{% static 'images/slider-pasta.jpg' %}" alt="" class="img-dim" uk-cover>
+                        <div class="uk-position-center uk-panel">
+                            <h1>Pasta</h1>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="uk-cover-container">
+                        <canvas width="" height="150px"></canvas>
+                        <img src="{% static 'images/slider-salad.jpg' %}" alt="" class="img-dim" uk-cover>
+                        <div class="uk-position-center uk-panel">
+                            <h1>Salads</h1>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="uk-cover-container">
+                        <canvas width="" height="150px"></canvas>
+                        <img src="{% static 'images/slider-platter.jpg' %}" alt="" class="img-dim" uk-cover>
+                        <div class="uk-position-center uk-panel">
+                            <h1>Dinner Platters</h1>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+        </div>
+        <ul uk-tab="animation: uk-animation-fade" id="tabs">
+            <li id="0"><a href="#">Regular Pizza</a></li>
+            <li id="1"><a href="#">Sicilian Pizza</a></li>
+            <li id="2"><a href="#">Subs</a></li>
+            <li id="3"><a href="#">Pasta</a></li>
+            <li id="4"><a href="#">Salad</a></li>
+            <li id="5"><a href="#">Platters</a></li>
+        </ul>
+
+        <ul class="uk-switcher uk-margin">
+            <li>
+                <table class="uk-table uk-table-small">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th class="uk-table-shrink">Small</th>
+                            <th class="uk-table-shrink">Large</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for pizza in reg_pizza %}
+                        <tr>
+                            <td uk-leader=" media: @s">{{ pizza.name }}</td>
+                            <td>${{ pizza.small_price }}</td>
+                            <td>${{ pizza.large_price }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </li>
+            <li>
+                <table class="uk-table uk-table-small">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th class="uk-table-shrink">Small</th>
+                            <th class="uk-table-shrink">Large</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for pizza in sic_pizza %}
+                        <tr>
+                            <td uk-leader="media: @s">{{ pizza.name }}</td>
+                            <td>${{ pizza.small_price }}</td>
+                            <td>${{ pizza.large_price }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </li>
+            <li>
+                <table class="uk-table uk-table-small">
+                    <tr>
+                        <th></th>
+                        <th class="uk-table-shrink">Small</th>
+                        <th class="uk-table-shrink">Large</th>
+                    </tr>
+                    {% for sub in subs %}
+                    <tr>
+                        <td uk-leader="media: @s">{{ sub.name }}</td>
+                        <td class="price">
+                            {% if sub.small_price %}
+                            ${{ sub.small_price }}
+                            {% else %}
+                            -
+                            {% endif %}
+                        </td>
+                        <td class="price">${{ sub.large_price }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </li>
+            <li>
+                <table class="uk-table uk-table-small">
+                    <tr>
+                        <th></th>
+                        <th class="uk-table-shrink">Price</th>
+                    </tr>
+                    {% for pasta in pastas %}
+                    <tr>
+                        <td uk-leader="media: @s">{{ pasta.name }}</td>
+                        <td class="price">${{ pasta.price }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </li>
+            <li>
+                <table class="uk-table uk-table-small">
+                    <tr>
+                        <th></th>
+                        <th class="uk-table-shrink">Price</th>
+                    </tr>
+                    {% for salad in salads %}
+                    <tr>
+                        <td uk-leader="media: @s">{{ salad.name }}</td>
+                        <td class="price">${{ salad.price }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </li>
+            <li>
+                <table class="uk-table uk-table-small">
+                    <tr>
+                        <th></th>
+                        <th class="uk-table-shrink">Small</th>
+                        <th class="uk-table-shrink">Large</th>
+                    </tr>
+                    {% for platter in platters %}
+                    <tr>
+                        <td uk-leader="media: @s">{{ platter.name }}</td>
+                        <td class="price">${{ platter.small_price }}</td>
+                        <td class="price">${{ platter.large_price }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- Restaurant Menu ends here -->
+
+<!-- FAQ Starts here -->
+<div class="uk-section uk-section-secondary uk-section-medium" uk-scrollspy="cls:uk-animation-scale-up">
+    <div class="uk-container">
+
+        <h3 class="uk-text-center">FAQ</h3>
+
+        <ul uk-accordion="collapsible: false">
+            <li class="uk-open">
+                <a class="uk-accordion-title" href="#">What's Regular Pizza?</a>
+                <div class="uk-accordion-content">
+                    <p>Our Regular pizza is a thin-crust or Neapolitan pizza. They come in 2 sizes: small (12"
+                        in
+                        diameter) and large (16" in diameter). The small is suitable for 1 to 2 people while the
+                        large
+                        feeds 2 to 4 people.</p>
+                </div>
+            </li>
+            <li>
+                <a class="uk-accordion-title" href="#">What's Sicilian Pizza?</a>
+                <div class="uk-accordion-content">
+                    <p>Our Sicilian pizza is a deep-dish or thick-crust pizza. We sell them in a 9-slice or a
+                        15-slice
+                        size.
+                    </p>
+                    <ul class="uk-list uk-list-bullet">
+                        <li>
+                            The 9-slice size is 16" x 16" and will feed anywhere from 3 to 5 people.
+                        </li>
+                        <li>
+                            The 15-slice size is 28" x 16", comes in 2 large pizza boxes and can feed 6 to 9
+                            people.
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+
+    </div>
+</div>
+<!-- FAQ ends here -->
+
+<!-- Contact Us Section starts here -->
+<div class="uk-section uk-section-primary" uk-scrollspy="cls:uk-animation-slide-left">
+    <div class="uk-container uk-flex uk-flex-center">
+
+        <h3 class="uk-text-center uk-display-inline"> <span uk-icon="icon: receiver; ratio: 1.6;"></span>
+            Call us now at
+            617-876-4897</h3>
+
+    </div>
+</div>
+<!-- Contact Us Section ends here -->
+{% include 'partials/_footer.html' %}
+{% endblock %}
+
+
+{% block scripts %}
+<script>
+    $(document).ready(function () {
+
+        document.querySelectorAll('#tabs>li').forEach(function (e) {
+            e.onclick = function () {
+                UIkit.slider($('#menu-slider')).show(e.id);
+            }
+        });
+
+    });
+</script>
+{% endblock %}

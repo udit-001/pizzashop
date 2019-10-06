@@ -1,0 +1,110 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+
+{% block title %}
+Your Orders
+{% endblock %}
+
+{% block head %}
+<style>
+    @media (max-width: 640px) {
+        .item {
+            font-size: 0.97em;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="uk-container uk-margin-medium">
+    <h2 class="uk-text-center"> My Orders </h2>
+    {% if orders %}
+    <div class="uk-child-width-1-2@m" uk-grid="masonry: true">
+        <!-- uk-scrollspy="cls: uk-animation-slide-bottom; target: .uk-card; repeat: true" -->
+        {% for order in orders %}
+        <div>
+            <div class="uk-card uk-card-default">
+                <div class="uk-card-header">
+                    <div class="uk-grid-small uk-flex-middle" uk-grid>
+                        <div class="uk-width-auto">
+                            <span uk-icon="icon: file-text; ratio: 1.7"></span>
+                        </div>
+                        <div class="uk-width-expand">
+                            <h3 class="uk-card-title uk-margin-remove-bottom">Order #{{ order.id }}</h3>
+                            <p class="uk-text-meta uk-margin-remove-top"><time
+                                    datetime="{{ order.ordered_date | date:'d/m/Y H:s'}}">{{ order.ordered_date | date:'d/m/Y H:s'}}</time>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-card-header uk-text-small">
+                    <div class="uk-flex uk-flex-middle uk-flex-wrap">
+                        <div class="uk-margin-small-right">
+                            <b>
+                                Deliver to:
+                            </b>
+                        </div>
+                        <div>
+                            {{ order.shipping_address.get_formatted_address }}
+                        </div>
+                        <div class="uk-flex uk-flex-middle uk-flex-wrap">
+                            <div class="uk-margin-small-right">
+                                <b>
+                                    Transaction ID:
+                                </b>
+                            </div>
+                            <div>
+                                {{ order.payment }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-card-body">
+                    <div class="uk-overflow-auto">
+                        <table class="uk-table uk-table-small">
+                            <thead>
+                                <tr>
+                                    <th>Item Name</th>
+                                    <th class="uk-table-shrink uk-visible@s">Quantity</th>
+                                    <th class="uk-table-shrink">Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in order.items.all %}
+                                <tr>
+                                    <td class="item">{{ item.name }} <span
+                                            class="uk-hidden@s">(x{{ item.quantity }})</span></td>
+                                    <td class="uk-text-center uk-visible@s">{{ item.quantity }}</td>
+                                    <td class="item">${{ item.price }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="uk-card-footer">
+                    <div class="uk-container uk-flex uk-flex-between uk-flex-middle">
+                        <span>
+                            Status : {{ order.status }}
+                        </span>
+                        <span>
+                            Total : ${{ order.get_order_total }} ({{ order.get_items_count }} items)
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="uk-text-center uk-margin-bottom-large">
+        <p>
+            <span uk-icon="icon: file-text; ratio: 1.2"></span> You haven't ordered anything yet!
+        </p>
+        <a class="uk-button uk-button-small uk-button-secondary" href="{% url 'orders_place' %}">
+            Start shopping
+        </a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

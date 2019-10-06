@@ -1,0 +1,254 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+
+{% block title %}
+Place Order
+{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/main.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="uk-container uk-width-1-2@s uk-width-1-1 uk-margin-medium">
+    {% include 'partials/_alerts.html' %}
+</div>
+<div class="uk-container uk-margin-medium">
+    <h2 class="uk-text-center"> <span>What's for lunch today?</span></h2>
+    <ul uk-tab="animation: uk-animation-slide-left-medium, uk-animation-slide-right-medium; connect: #menu-items"
+        id="tabs">
+        <li><a href="#">Regular Pizza</a></li>
+        <li><a href="#">Sicilian Pizza</a></li>
+        <li><a href="#">Subs</a></li>
+        <li><a href="#">Pasta</a></li>
+        <li><a href="#">Salad</a></li>
+        <li><a href="#">Dinner Platter</a></li>
+    </ul>
+
+    <ul class="uk-switcher uk-margin" id="menu-items">
+        <li>
+            <form class="uk-form-stacked" method="POST">
+                {% csrf_token %}
+                <div class="uk-form-label">Select Size</div>
+                <select class="uk-select" name="size" required>
+                    <option value="" selected disabled hidden>Choose Your Size</option>
+                    <optgroup label="Choose your size">
+                        <option value="small">Small</option>
+                        <option value="large">Large</option>
+                    </optgroup>
+                </select>
+                <br><br>
+                <div class="uk-form-label">Select Pizza</div>
+                <select class="uk-select topping-control" name="pizza_name" data-control="reg_toppings" required>
+                    <option value="" selected disabled hidden>Choose Your Pizza</option>
+                    <optgroup label="Choose Your Pizza">
+                        {% for pizza in reg_pizza %}
+                        <option value="{{ pizza.no_of_toppings }}">{{ pizza.name }}</option>
+                        {% endfor %}
+                    </optgroup>
+                </select>
+                <br><br>
+                <div class="uk-form-label">Toppings</div>
+                <div class="uk-grid-small options" uk-grid>
+                    {% for topping in toppings %}
+                    <label>
+                        <input class="uk-checkbox" type="checkbox" name="reg_toppings" value="{{ topping.id }}">
+                        {{ topping.name }}
+                    </label>
+                    {% endfor %}
+                </div>
+                <br>
+                <div class="uk-form-label">Quantity</div>
+                <input type="number" class="uk-input uk-display-block" min="1" value="1" name="qty">
+                <br class="uk-visible@s">
+                <button
+                    class="uk-button uk-button-primary uk-button-small uk-margin-auto-right uk-width-1-6@m uk-width-1-4@s uk-width-1-1 uk-align-right@s uk-align-center"
+                    name="form_name" value="reg_pizza">
+                    Add to Cart
+                </button>
+            </form>
+        </li>
+        <li>
+            <form class="uk-form-stacked" method="POST">
+                {% csrf_token %}
+                <div class="uk-form-label">Select Size</div>
+                <select class="uk-select" name="size" required>
+                    <option value="" selected disabled hidden>Choose Your Size</option>
+                    <optgroup label="Choose Your Size">
+                        <option value="small">Small</option>
+                        <option value="large">Large</option>
+                    </optgroup>
+                </select>
+                <br><br>
+                <div class="uk-form-label">Select Pizza</div>
+                <select class="uk-select topping-control" name="pizza_name" data-control="sic_toppings" required>
+                    <option value="" selected disabled hidden>Choose Your Pizza</option>
+                    <optgroup label="Choose Your Pizza">
+                        {% for pizza in sic_pizza %}
+                        <option value="{{ pizza.no_of_toppings }}">{{ pizza.name }}</option>
+                        {% endfor %}
+                    </optgroup>
+                </select>
+                <br><br>
+                <div class="uk-form-label">Toppings</div>
+                <div class="uk-grid-small options" uk-grid>
+                    {% for topping in toppings %}
+                    <label>
+                        <input class="uk-checkbox" type="checkbox" name="sic_toppings" value="{{ topping.id }}">
+                        {{ topping.name }}
+                    </label>
+                    {% endfor %}
+                </div>
+                <br>
+                <div class="uk-form-label">Quantity</div>
+                <input type="number" class="uk-input uk-display-block" min="1" value="1" name="qty">
+                <br class="uk-visible@s">
+                <button
+                    class="uk-button uk-button-primary uk-button-small uk-margin-auto-right uk-width-1-6@m uk-width-1-4@s uk-width-1-1 uk-align-right@s uk-align-center"
+                    name="form_name" value="sic_pizza">
+                    Add to Cart
+                </button>
+            </form>
+        </li>
+        <li>
+            <form class="uk-form-stacked" method="POST">
+                {% csrf_token %}
+                <table class="uk-table uk-table-small uk-viseible@s platter-resize">
+                    <tr>
+                        <th class="uk-width-1-2@s uk-width-1-2"> item name</th>
+                        <th class="uk-width-1-6@s uk-width-1-4"> small</th>
+                        <th class="uk-width-1-6@s uk-width-1-4"> large</th>
+                    </tr>
+                    {% for sub in subs %}
+                    <tr>
+                        <td>{{ sub.name }}</td>
+                        {% if sub.small_price %}
+                        <td class="price"><label><input class="uk-radio" type="radio" name="sub"
+                                    value="small-{{ sub.id }}" required>
+                                ${{ sub.small_price }}</label></td>
+                        {% else %}
+                        <td></td>
+                        {% endif %}
+                        <td class="price">
+                            <label>
+                                <input class="uk-radio" type="radio" name="sub" value="large-{{ sub.id }}" required>
+                                ${{ sub.large_price }}
+                            </label>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+                <div class="uk-form-label">Extras</div>
+                <div class="uk-grid-small options" uk-grid>
+                    {% for extra in extras %}
+                    <label>
+                        <input class="uk-checkbox" type="checkbox" name="extra" value="{{ extra.id }}">
+                        {{ extra.name }}
+                    </label>
+                    {% endfor %}
+                </div>
+                <br>
+                <div class="uk-form-label">Quantity</div>
+                <input type="number" class="uk-input uk-display-block" min="1" value="1" name="qty">
+                <br class="uk-visible@s">
+                <button
+                    class="uk-button uk-button-primary uk-button-small uk-margin-auto-right uk-width-1-6@m uk-width-1-4@s uk-width-1-1 uk-align-right@s uk-align-center"
+                    name="form_name" value="sub">Add
+                    to Cart</button>
+            </form>
+        </li>
+        <li>
+            <form class="uk-form-stacked" method="POST">
+                {% csrf_token %}
+                <table class="uk-table uk-table-small uk-viseible@s">
+                    <tr>
+                        <th class="uk-width-1-2@s uk-width-1-2"> item name</th>
+                        <th class="uk-width-1-6@s uk-width-1-6"> price</th>
+                    </tr>
+                    {% for pasta in pastas %}
+                    <tr>
+                        <td>{{ pasta.name }}</td>
+                        <div class="uk-form-controls">
+                            <td class="price">
+                                <label>
+                                    <input class="uk-radio" type="radio" name="pasta" value="{{ pasta.id }}" required>
+                                    ${{ pasta.price }}
+                                </label>
+                            </td>
+                        </div>
+                    </tr>
+                    {% endfor %}
+                </table>
+                <div class="uk-form-label">Quantity</div>
+                <input type="number" class="uk-input uk-display-block" min="1" value="1" name="qty">
+                <br class="uk-visible@s">
+                <button
+                    class="uk-button uk-button-primary uk-button-small uk-margin-auto-right uk-width-1-6@m uk-width-1-4@s uk-width-1-1 uk-align-right@s uk-align-center"
+                    name="form_name" value="pasta">Add
+                    to Cart</button>
+            </form>
+        </li>
+        <li>
+            <form class="uk-form-stacked" method="POST">
+                {% csrf_token %}
+                <table class="uk-table uk-table-small uk-viseible@s">
+                    <tr>
+                        <th class="uk-width-1-2"> item name</th>
+                        <th class="uk-width-1-6"> price</th>
+                    </tr>
+                    {% for salad in salads %}
+                    <tr>
+                        <td>{{ salad.name }}</td>
+                        <td class="price"><label><input class="uk-radio" type="radio" name="salad"
+                                    value="{{ salad.id }}" required>
+                                ${{ salad.price }}</label></td>
+                    </tr>
+                    {% endfor %}
+                </table>
+                <div class="uk-form-label">Quantity</div>
+                <input type="number" class="uk-input uk-display-block" min="1" value="1" name="qty">
+                <br class="uk-visible@s">
+                <button
+                    class="uk-button uk-button-primary uk-button-small uk-margin-auto-right uk-width-1-6@m uk-width-1-4@s uk-width-1-1 uk-align-right@s uk-align-center"
+                    name="form_name" value="salad">Add
+                    to Cart</button>
+            </form>
+        </li>
+        <li>
+            <form class="uk-form-stacked" method="POST">
+                {% csrf_token %}
+                <table class="uk-table uk-table-small uk-viseible@s platter-resize">
+                    <tr>
+                        <th class="uk-width-1-2@s uk-width-1-2"> item name</th>
+                        <th class="uk-width-1-6@s uk-width-1-4"> small</th>
+                        <th class="uk-width-1-6@s uk-width-1-4"> large</th>
+                    </tr>
+                    {% for platter in platters %}
+                    <tr>
+                        <td>{{ platter.name }}</td>
+                        <td class="price"><label><input class="uk-radio" type="radio" name="platter"
+                                    value="small-{{ platter.id }}" required>
+                                ${{ platter.small_price }}</label></td>
+                        <td class="price"><label><input class="uk-radio" type="radio" name="platter"
+                                    value="large-{{ platter.id }}" required>
+                                ${{ platter.large_price }}</label></td>
+                    </tr>
+                    {% endfor %}
+                </table>
+                <div class="uk-form-label">Quantity</div>
+                <input type="number" class="uk-input uk-display-block" min="1" value="1" name="qty">
+                <br class="uk-visible@s">
+                <button
+                    class="uk-button uk-button-primary uk-button-small uk-margin-auto-right uk-width-1-6@m uk-width-1-4@s uk-width-1-1 uk-align-right@s uk-align-center"
+                    name="form_name" value="platter">Add
+                    to Cart</button>
+            </form>
+        </li>
+    </ul>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/order.js' %}"></script>
+<script src="{% static 'js/alert.js' %}"></script>
+{% endblock %}
