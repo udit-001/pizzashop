@@ -6,6 +6,10 @@
 ## Overview 
 This is an app for handling a pizza restaurant’s online orders. Customers will be able to browse the restaurant’s menu, add items to their cart, and submit their orders. They can also add addresses, edit existing addresses. Meanwhile, the restaurant owners will be able to add and update menu items, and view orders that have been placed.
 
+
+## Database Schema
+Here is the database schema employed within the application, accessible via the following link: [click here](https://dbdiagram.io/d/Pizza-Shop-62c5666869be0b672caea8e3).
+
 ## Features
 - 🍴 **Menu** : The app allows the customer to be able to browse the menu, listing all the menu items, their size variations and their respective prices.
 
