@@ -4,7 +4,6 @@ import os
 import environ
 
 env = environ.Env(
-    DEBUG=(bool, False)
 )
 
 env.read_env()
@@ -153,11 +152,11 @@ EMAIL_HOST_PASSWORD = env('SENDGRID_API')
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'no-reply@pizzitalia.herokuapp.com'
 
-#Recaptcha
+# Recaptcha
 RECAPTCHA_PUBLIC_KEY = env('RECAPTCHA_PUBLIC')
 RECAPTCHA_PRIVATE_KEY = env('RECAPTCHA_PRIVATE')
 
-#STRIPE
+# STRIPE
 STRIPE_KEY = env('STRIPE_KEY')
 
 # Security
