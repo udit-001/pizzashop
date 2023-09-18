@@ -10,6 +10,19 @@ This is an app for handling a pizza restaurant’s online orders. Customers will
 ## Database Schema
 Here is the database schema employed within the application, accessible via the following link: [click here](https://dbdiagram.io/d/Pizza-Shop-62c5666869be0b672caea8e3).
 
+## Running the Project
+1. **Run using Docker Compose**: Ensure you have Docker Compose installed on your system. Navigate to the project's root directory and run the following command to build and start the application and its services:
+
+   ```
+   docker compose up -d
+   ```
+
+2. **Access the Application**: After successfully launching the containers, you can access the application in your web browser at http://localhost:8000
+3. **Demo Admin Access** : To access the admin panel, visit http://localhost:8000/admin and use the following credentials:
+
+    - Username: demo
+    - Password: demo@123
+
 ## Features
 - 🍴 **Menu** : The app allows the customer to be able to browse the menu, listing all the menu items, their size variations and their respective prices.
 
