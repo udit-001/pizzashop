@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  django:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    image: pizzitalia
+    container_name: pizza_web
+    ports:
+      - "8000:8000"
+    depends_on:
+      - "db"
+    env_file:
+      - ./src/.env
+    command: /start
+    volumes:
+      - media:/app/media/
+
+  db:
+    restart: always
+    image: postgres:latest
+    container_name: pizza_db
+    ports:
+      - "5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=pizzitalia
+      - POSTGRES_PASSWORD=pizzitalia
+
+
+volumes:
+  postgres_data:
+  media:
