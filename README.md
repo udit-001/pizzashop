@@ -1,11 +1,7 @@
 # Pizzashop 
 
-![Website Status](https://img.shields.io/website/https/bookistic.herokuapp.com?down_color=lightgrey&down_message=offline&style=flat-square&up_color=blue&up_message=online)
-![Security Headers](https://img.shields.io/security-headers?style=flat-square&url=https%3A%2F%2Fpizzitalia.herokuapp.com)
 [![HitCount](http://hits.dwyl.com/udit-001/pizzashop.svg)](http://hits.dwyl.com/udit-001/pizzashop)
 
-
-**Website** : https://pizzitalia.herokuapp.com
 
 ## Overview 
 This is an app for handling a pizza restaurant’s online orders. Customers will be able to browse the restaurant’s menu, add items to their cart, and submit their orders. They can also add addresses, edit existing addresses. Meanwhile, the restaurant owners will be able to add and update menu items, and view orders that have been placed.
