@@ -1,0 +1,569 @@
+[
+{
+    "model": "sites.site",
+    "pk": 1,
+    "fields": {
+        "domain": "localhost",
+        "name": "localhost"
+    }
+},
+{
+    "model": "menu.salad",
+    "pk": 1,
+    "fields": {
+        "name": "Garden Salad",
+        "price": "8.75"
+    }
+},
+{
+    "model": "menu.salad",
+    "pk": 2,
+    "fields": {
+        "name": "Greek Salad",
+        "price": "10.25"
+    }
+},
+{
+    "model": "menu.salad",
+    "pk": 3,
+    "fields": {
+        "name": "Antipasto",
+        "price": "11.95"
+    }
+},
+{
+    "model": "menu.salad",
+    "pk": 4,
+    "fields": {
+        "name": "Salad w/Tuna",
+        "price": "11.95"
+    }
+},
+{
+    "model": "menu.platter",
+    "pk": 1,
+    "fields": {
+        "name": "Garden Salad",
+        "small_price": "40.00",
+        "large_price": "65.00"
+    }
+},
+{
+    "model": "menu.platter",
+    "pk": 2,
+    "fields": {
+        "name": "Greek Salad",
+        "small_price": "50.00",
+        "large_price": "75.00"
+    }
+},
+{
+    "model": "menu.platter",
+    "pk": 3,
+    "fields": {
+        "name": "Antipasto",
+        "small_price": "50.00",
+        "large_price": "75.00"
+    }
+},
+{
+    "model": "menu.platter",
+    "pk": 4,
+    "fields": {
+        "name": "Baked Ziti",
+        "small_price": "40.00",
+        "large_price": "65.00"
+    }
+},
+{
+    "model": "menu.platter",
+    "pk": 5,
+    "fields": {
+        "name": "Meatball Parm",
+        "small_price": "50.00",
+        "large_price": "75.00"
+    }
+},
+{
+    "model": "menu.platter",
+    "pk": 6,
+    "fields": {
+        "name": "Chicken Parm",
+        "small_price": "55.00",
+        "large_price": "85.00"
+    }
+},
+{
+    "model": "menu.topping",
+    "pk": 1,
+    "fields": {
+        "name": "Pepperoni"
+    }
+},
+{
+    "model": "menu.topping",
+    "pk": 2,
+    "fields": {
+        "name": "Sausage"
+    }
+},
+{
+    "model": "menu.topping",
+    "pk": 3,
+    "fields": {
+        "name": "Mushrooms"
+    }
+},
+{
+    "model": "menu.topping",
+    "pk": 4,
+    "fields": {
+        "name": "Onions"
+    }
+},
+{
+    "model": "menu.topping",
+    "pk": 5,
+    "fields": {
+        "name": "Ham"
+    }
+},
+{
+    "model": "menu.topping",
+    "pk": 6,
+    "fields": {
+        "name": "Canadian Bacon"
+    }
+},
+{
+    "model": "menu.topping",
+    "pk": 7,
+    "fields": {
+        "name": "Pineapple"
+    }
+},
+{
+    "model": "menu.topping",
+    "pk": 8,
+    "fields": {
+        "name": "Eggplant"
+    }
+},
+{
+    "model": "menu.topping",
+    "pk": 9,
+    "fields": {
+        "name": "Tomato & Basil"
+    }
+},
+{
+    "model": "menu.topping",
+    "pk": 10,
+    "fields": {
+        "name": "Green Peppers"
+    }
+},
+{
+    "model": "menu.topping",
+    "pk": 11,
+    "fields": {
+        "name": "Hamburger"
+    }
+},
+{
+    "model": "menu.topping",
+    "pk": 12,
+    "fields": {
+        "name": "Spinach"
+    }
+},
+{
+    "model": "menu.topping",
+    "pk": 13,
+    "fields": {
+        "name": "Artichoke"
+    }
+},
+{
+    "model": "menu.topping",
+    "pk": 14,
+    "fields": {
+        "name": "Buffalo Chicken"
+    }
+},
+{
+    "model": "menu.topping",
+    "pk": 15,
+    "fields": {
+        "name": "Barbecue Chicken"
+    }
+},
+{
+    "model": "menu.topping",
+    "pk": 16,
+    "fields": {
+        "name": "Anchovies"
+    }
+},
+{
+    "model": "menu.topping",
+    "pk": 17,
+    "fields": {
+        "name": "Black Olives"
+    }
+},
+{
+    "model": "menu.topping",
+    "pk": 18,
+    "fields": {
+        "name": "Fresh Garlic"
+    }
+},
+{
+    "model": "menu.topping",
+    "pk": 19,
+    "fields": {
+        "name": "Zucchini"
+    }
+},
+{
+    "model": "menu.pasta",
+    "pk": 1,
+    "fields": {
+        "name": "Baked Ziti w/Mozzarella",
+        "price": "8.75"
+    }
+},
+{
+    "model": "menu.pasta",
+    "pk": 2,
+    "fields": {
+        "name": "Baked Ziti w/Meatballs",
+        "price": "11.25"
+    }
+},
+{
+    "model": "menu.pasta",
+    "pk": 3,
+    "fields": {
+        "name": "Baked Ziti w/Chicken",
+        "price": "12.50"
+    }
+},
+{
+    "model": "menu.extra",
+    "pk": 1,
+    "fields": {
+        "name": "Cheese",
+        "price": "0.75"
+    }
+},
+{
+    "model": "menu.sub",
+    "pk": 1,
+    "fields": {
+        "name": "Cheese",
+        "small_price": "8.75",
+        "large_price": "10.75"
+    }
+},
+{
+    "model": "menu.sub",
+    "pk": 2,
+    "fields": {
+        "name": "Italian",
+        "small_price": "8.75",
+        "large_price": "10.75"
+    }
+},
+{
+    "model": "menu.sub",
+    "pk": 3,
+    "fields": {
+        "name": "Ham + Cheese",
+        "small_price": "8.75",
+        "large_price": "10.75"
+    }
+},
+{
+    "model": "menu.sub",
+    "pk": 4,
+    "fields": {
+        "name": "Meatball",
+        "small_price": "8.75",
+        "large_price": "10.75"
+    }
+},
+{
+    "model": "menu.sub",
+    "pk": 5,
+    "fields": {
+        "name": "Tuna",
+        "small_price": "8.75",
+        "large_price": "10.75"
+    }
+},
+{
+    "model": "menu.sub",
+    "pk": 6,
+    "fields": {
+        "name": "Turkey",
+        "small_price": "9.75",
+        "large_price": "11.75"
+    }
+},
+{
+    "model": "menu.sub",
+    "pk": 7,
+    "fields": {
+        "name": "Chicken Parmigiana",
+        "small_price": "9.75",
+        "large_price": "11.75"
+    }
+},
+{
+    "model": "menu.sub",
+    "pk": 8,
+    "fields": {
+        "name": "Eggplant Parmigiana",
+        "small_price": "8.75",
+        "large_price": "10.75"
+    }
+},
+{
+    "model": "menu.sub",
+    "pk": 9,
+    "fields": {
+        "name": "Steak",
+        "small_price": "9.00",
+        "large_price": "11.00"
+    }
+},
+{
+    "model": "menu.sub",
+    "pk": 10,
+    "fields": {
+        "name": "Steak + Cheese",
+        "small_price": "9.75",
+        "large_price": "11.75"
+    }
+},
+{
+    "model": "menu.sub",
+    "pk": 11,
+    "fields": {
+        "name": "Steak + Cheese + Mushrooms",
+        "small_price": "0.75",
+        "large_price": "0.75"
+    }
+},
+{
+    "model": "menu.sub",
+    "pk": 12,
+    "fields": {
+        "name": "Steak + Cheese + Green Peppers",
+        "small_price": "0.75",
+        "large_price": "0.75"
+    }
+},
+{
+    "model": "menu.sub",
+    "pk": 13,
+    "fields": {
+        "name": "Steak + Cheese + Onions",
+        "small_price": "0.75",
+        "large_price": "0.75"
+    }
+},
+{
+    "model": "menu.sub",
+    "pk": 14,
+    "fields": {
+        "name": "Sausage, Pepper & Onions",
+        "small_price": null,
+        "large_price": "11.75"
+    }
+},
+{
+    "model": "menu.sub",
+    "pk": 15,
+    "fields": {
+        "name": "Hamburger",
+        "small_price": "7.95",
+        "large_price": "9.95"
+    }
+},
+{
+    "model": "menu.sub",
+    "pk": 16,
+    "fields": {
+        "name": "Cheeseburger",
+        "small_price": "8.75",
+        "large_price": "10.75"
+    }
+},
+{
+    "model": "menu.sub",
+    "pk": 17,
+    "fields": {
+        "name": "Fried Chicken",
+        "small_price": "9.75",
+        "large_price": "11.75"
+    }
+},
+{
+    "model": "menu.sub",
+    "pk": 18,
+    "fields": {
+        "name": "Veggie",
+        "small_price": "9.75",
+        "large_price": "11.75"
+    }
+},
+{
+    "model": "menu.regularpizza",
+    "pk": 1,
+    "fields": {
+        "name": "Cheese",
+        "small_price": "13.95",
+        "large_price": "19.45",
+        "no_of_toppings": 0
+    }
+},
+{
+    "model": "menu.regularpizza",
+    "pk": 2,
+    "fields": {
+        "name": "1 topping",
+        "small_price": "15.25",
+        "large_price": "21.45",
+        "no_of_toppings": 1
+    }
+},
+{
+    "model": "menu.regularpizza",
+    "pk": 3,
+    "fields": {
+        "name": "2 toppings",
+        "small_price": "16.45",
+        "large_price": "23.45",
+        "no_of_toppings": 2
+    }
+},
+{
+    "model": "menu.regularpizza",
+    "pk": 4,
+    "fields": {
+        "name": "3 toppings",
+        "small_price": "17.45",
+        "large_price": "25.45",
+        "no_of_toppings": 3
+    }
+},
+{
+    "model": "menu.regularpizza",
+    "pk": 5,
+    "fields": {
+        "name": "Special",
+        "small_price": "18.95",
+        "large_price": "27.45",
+        "no_of_toppings": 4
+    }
+},
+{
+    "model": "menu.sicilianpizza",
+    "pk": 1,
+    "fields": {
+        "name": "Cheese",
+        "small_price": "25.95",
+        "large_price": "40.75",
+        "no_of_toppings": 0
+    }
+},
+{
+    "model": "menu.sicilianpizza",
+    "pk": 2,
+    "fields": {
+        "name": "1 item",
+        "small_price": "27.95",
+        "large_price": "42.75",
+        "no_of_toppings": 1
+    }
+},
+{
+    "model": "menu.sicilianpizza",
+    "pk": 3,
+    "fields": {
+        "name": "2 items",
+        "small_price": "29.95",
+        "large_price": "44.75",
+        "no_of_toppings": 2
+    }
+},
+{
+    "model": "menu.sicilianpizza",
+    "pk": 4,
+    "fields": {
+        "name": "3 items",
+        "small_price": "31.95",
+        "large_price": "46.75",
+        "no_of_toppings": 3
+    }
+},
+{
+    "model": "menu.sicilianpizza",
+    "pk": 5,
+    "fields": {
+        "name": "Special",
+        "small_price": "33.95",
+        "large_price": "48.95",
+        "no_of_toppings": 4
+    }
+},
+{
+    "model": "auth.user",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$150000$K2KVZy7mpGjS$7uxWXkr2YU7DPAXIbW784+TThnrZHAG2w+dXbmW9yCA=",
+        "last_login": "2023-09-18T11:45:38.714Z",
+        "is_superuser": true,
+        "username": "demo",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2023-09-18T11:14:39.446Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "socialaccount.socialapp",
+    "pk": 1,
+    "fields": {
+        "provider": "facebook",
+        "name": "Facebook",
+        "client_id": "430409811134949",
+        "secret": "4e6a3fcfea574d750f037564cb8c6257",
+        "key": "",
+        "sites": [
+            1
+        ]
+    }
+},
+{
+    "model": "socialaccount.socialapp",
+    "pk": 2,
+    "fields": {
+        "provider": "google",
+        "name": "Google",
+        "client_id": "234720612379-tgp68foc3kan6f9tvkmqksso3649acer.apps.googleusercontent.com",
+        "secret": "_Zg-lgVfC_nNptmgYo7k8gsk",
+        "key": "",
+        "sites": [
+            1
+        ]
+    }
+}
+]
