@@ -8,7 +8,8 @@ env = environ.Env(
 
 env.read_env()
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(os.path.dirname(
+    os.path.dirname(os.path.abspath(__file__))))
 
 
 SECRET_KEY = env('SECRET_KEY')
@@ -158,12 +159,3 @@ RECAPTCHA_PRIVATE_KEY = env('RECAPTCHA_PRIVATE')
 
 # STRIPE
 STRIPE_KEY = env('STRIPE_KEY')
-
-# Security
-SECURE_SSL_REDIRECT = True
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
-SECURE_CONTENT_TYPE_NOSNIFF = True
-SECURE_BROWSER_XSS_FILTER = True
-X_FRAME_OPTIONS = 'DENY'
-SECURE_HSTS_SECONDS = 31536000
