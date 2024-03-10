@@ -8,7 +8,9 @@ This is an app for handling a pizza restaurant’s online orders. Customers will
 
 
 ## Database Schema
-Here is the database schema employed within the application, accessible via the following link: [click here](https://dbdiagram.io/d/Pizza-Shop-62c5666869be0b672caea8e3).
+Here is the database schema employed within the application:
+
+[![Database Schema](/docs/pizza-shop.svg 'Pizza Shop Database Schema')](https://dbdiagram.io/d/Pizza-Shop-62c5666869be0b672caea8e3)
 
 ## Running the Project
 1. **Run using Docker Compose**: Ensure you have Docker Compose installed on your system. Navigate to the project's root directory and run the following command to build and start the application and its services:
