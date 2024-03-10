@@ -20,6 +20,9 @@ Presently, the relationship between OrderItem and Order is ManyToMany, establish
 ### Address
 Users can have multiple addresses associated with their account. Therefore, the Address table has a foreign key relationship with the user table. This table includes all the necessary fields to store a user's address.
 
+## User Cart
+The application's cart mechanism operates through the utilization of the `is_ordered` boolean flag within the order table. Once the user successfully completes the payment process, the `is_ordered` field is set to True. Following the completion of payment, the user will no longer view the items in the cart. Instead, they can find the order on the "My Orders" page.
+
 ## Authentication
 This project offers various authentication methods, including:
 
