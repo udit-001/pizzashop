@@ -28,12 +28,12 @@ This project offers various authentication methods, including:
 3. GitHub OAuth
 4. Facebook OAuth
 
-Social authentication features are facilitated by the django-allauth provider.
+Social authentication features are facilitated by the [django-allauth](https://github.com/pennersr/django-allauth) provider.
 
 ## Payment
 This project utilizes Stripe to collect credit card payments from users for their orders, leveraging Stripe's Python SDK.
 
 ## Google Places Integration
-The application is equipped with Google Places library to assist users in entering accurate address details. This feature presents users with an autocomplete input, allowing them to select their address from a list of verified options provided by Google. This integration aims to mitigate delivery issues caused by inaccurate addresses.
+The application is equipped with [Google Places library](https://developers.google.com/places/) to assist users in entering accurate address details. This feature presents users with an autocomplete input, allowing them to select their address from a list of verified options provided by Google. This integration aims to mitigate delivery issues caused by inaccurate addresses.
 
 Additionally, users have the option to autofill their address using their current location, which streamlines the address entry process and saves time.
