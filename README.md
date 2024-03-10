@@ -6,11 +6,8 @@
 ## Overview 
 This is an app for handling a pizza restaurant’s online orders. Customers will be able to browse the restaurant’s menu, add items to their cart, and submit their orders. They can also add addresses, edit existing addresses. Meanwhile, the restaurant owners will be able to add and update menu items, and view orders that have been placed.
 
-
-## Database Schema
-Here is the database schema employed within the application:
-
-[![Database Schema](/docs/pizza-shop.svg 'Pizza Shop Database Schema')](https://dbdiagram.io/d/Pizza-Shop-62c5666869be0b672caea8e3)
+## System Design
+For additional insights into the system design of this application, please refer to the document provided [here.](/docs/system-design.md)
 
 ## Running the Project
 1. **Run using Docker Compose**: Ensure you have Docker Compose installed on your system. Navigate to the project's root directory and run the following command to build and start the application and its services:
