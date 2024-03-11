@@ -40,3 +40,14 @@ This project utilizes Stripe to collect credit card payments from users for thei
 The application is equipped with [Google Places library](https://developers.google.com/places/) to assist users in entering accurate address details. This feature presents users with an autocomplete input, allowing them to select their address from a list of verified options provided by Google. This integration aims to mitigate delivery issues caused by inaccurate addresses.
 
 Additionally, users have the option to autofill their address using their current location, which streamlines the address entry process and saves time.
+
+## Security
+Ensuring the highest level of security is our top priority, and we have implemented various measures within the project. Here is a detailed overview:
+
+### Project Secrets Management
+In our project, we have prioritized security by storing all sensitive project secrets in a special file called .env. To achieve this, we rely on a convenient package called [django-environ.](https://github.com/joke2k/django-environ) This package helps us retrieve these secrets directly from the .env file located in our project directory.
+
+### reCaptcha Protection
+To fortify our system against automated attacks, we have integrated a security feature using the [django-reCAPTCHA](https://github.com/praekelt/django-recaptcha) library. This library serves as a defense mechanism, helping us distinguish between human users and automated bots, thus adding an additional layer of protection.
+
+When someone interacts with our system, especially during sensitive actions like login or registration form submissions, reCAPTCHA steps in.
