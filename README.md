@@ -106,6 +106,26 @@ To run this project in a production environment, it is necessary to generate you
 
 Upon completion of the setup process, you will gain access to the reCAPTCHA keys. Subsequently, please proceed to update the `.env` file, assigning the site key to `RECAPTCHA_PUBLIC` and the secret key to `RECAPTCHA_PRIVATE`.
 
+
+#### Step 5: Configuring Email SMTP Server
+
+##### Using SendGrid
+To set up the project's SMTP server, SendGrid was selected due to its reliable free tier. For detailed instructions, consult the [SendGrid documentation](https://docs.sendgrid.com/for-developers/sending-email/integrating-with-the-smtp-api) and acquire the API key.
+
+Once obtained, insert the API key value in the .env file under the label `SENDGRID_API`. Additionally, ensure the correct sender address by updating the `DEFAULT_FROM_EMAIL` environment variable.
+
+##### Using Other SMTP Provider
+Alternatively, if you prefer to use a different SMTP Provider, simply configure the following environment variables to match your SMTP server settings:
+
+- `EMAIL_HOST`
+- `EMAIL_PORT`
+- `EMAIL_HOST_USER`
+- `EMAIL_HOST_PASSWORD`
+- `EMAIL_USE_TLS`
+- `DEFAULT_FROM_EMAIL`
+
+For more information on [SMTP configurations](https://docs.djangoproject.com/en/dev/topics/email/#smtp-backend), refer to the SMTP section in the Django documentation.
+
 ## Technical Details
 Libraries used in this project are:
 
