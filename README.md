@@ -107,14 +107,14 @@ To run this project in a production environment, it is necessary to generate you
 Upon completion of the setup process, you will gain access to the reCAPTCHA keys. Subsequently, please proceed to update the `.env` file, assigning the site key to `RECAPTCHA_PUBLIC` and the secret key to `RECAPTCHA_PRIVATE`.
 
 
-#### Step 5: Configuring Email SMTP Server
+### Step 5: Configuring Email SMTP Server
 
-##### Using SendGrid
+#### Using SendGrid
 To set up the project's SMTP server, SendGrid was selected due to its reliable free tier. For detailed instructions, consult the [SendGrid documentation](https://docs.sendgrid.com/for-developers/sending-email/integrating-with-the-smtp-api) and acquire the API key.
 
 Once obtained, insert the API key value in the .env file under the label `SENDGRID_API`. Additionally, ensure the correct sender address by updating the `DEFAULT_FROM_EMAIL` environment variable.
 
-##### Using Other SMTP Provider
+#### Using Other SMTP Provider
 Alternatively, if you prefer to use a different SMTP Provider, simply configure the following environment variables to match your SMTP server settings:
 
 - `EMAIL_HOST`
@@ -126,7 +126,7 @@ Alternatively, if you prefer to use a different SMTP Provider, simply configure 
 
 For more information on [SMTP configurations](https://docs.djangoproject.com/en/dev/topics/email/#smtp-backend), refer to the SMTP section in the Django documentation.
 
-#### Step 6: Setup Google Places
+### Step 6: Setup Google Places
 In this project, we employ the Google Places API to offer users an autocomplete feature when inputting address details. To ensure proper functionality in a production environment, it is necessary to generate an API key. Please consult the documentation provided [here](https://developers.google.com/maps/documentation/places/web-service/get-api-key) to obtain the API key. Once acquired, insert the key into the `.env` file, assigning it to the variable `PLACES_API_KEY`.
 
 ## Technical Details
