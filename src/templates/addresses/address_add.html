@@ -174,7 +174,7 @@ Add Address
 {% block scripts %}
 <script src="{% static 'js/alert.js' %}"></script>
 <script type="text/javascript"
-    src="https://maps.google.com/maps/api/js?key=AIzaSyCPNm1C3d-T9z8rd_dj_kjsCpxeWpahOEw&libraries=places,geocode">
+    src="https://maps.google.com/maps/api/js?key={{ PLACES_API_KEY }}&libraries=places,geocode">
 </script>
 <script>
     var latlng;

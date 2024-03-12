@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core import serializers
@@ -35,13 +36,15 @@ def address_add(request):
                 return redirect('address_add')
         else:
             context = {
-                'address_form': form
+                'address_form': form,
+                'PLACES_API_KEY': settings.PLACES_API_KEY
             }
             return render(request, 'addresses/address_add.html', context)
     else:
 
         context = {
-            'address_form': AddressForm()
+            'address_form': AddressForm(),
+            'PLACES_API_KEY': settings.PLACES_API_KEY
         }
         return render(request, 'addresses/address_add.html', context)
 
