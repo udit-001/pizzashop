@@ -126,6 +126,9 @@ Alternatively, if you prefer to use a different SMTP Provider, simply configure 
 
 For more information on [SMTP configurations](https://docs.djangoproject.com/en/dev/topics/email/#smtp-backend), refer to the SMTP section in the Django documentation.
 
+#### Step 6: Setup Google Places
+In this project, we employ the Google Places API to offer users an autocomplete feature when inputting address details. To ensure proper functionality in a production environment, it is necessary to generate an API key. Please consult the documentation provided [here](https://developers.google.com/maps/documentation/places/web-service/get-api-key) to obtain the API key. Once acquired, insert the key into the `.env` file, assigning it to the variable `PLACES_API_KEY`.
+
 ## Technical Details
 Libraries used in this project are:
 
