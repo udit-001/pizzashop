@@ -1,13 +1,14 @@
 ## Database Schema
 Here is the database schema employed within the application:
 
-[![Database Schema](/docs/pizza-shop.svg 'Pizza Shop Database Schema')](https://dbdiagram.io/d/Pizza-Shop-62c5666869be0b672caea8e3)
-
-## Database Description
-Here is a concise overview of the different tables presented in the diagram above:
-
 ### Menu Items
+
+[![Database Schema](/docs/menu-items.svg 'Pizza Shop Database Schema')](https://dbdiagram.io/d/Pizza-Shop-62c5666869be0b672caea8e3)
+
 Several tables are employed to store information about menu items, including Regular Pizza, Salad, Sicilian Pizza, Topping, Extra, Sub, Pasta, and Platter. These tables contain essential details about each menu item, such as its name and price.
+
+
+[![Database Schema](/docs/orders-user.svg 'Pizza Shop Database Schema')](https://dbdiagram.io/d/Pizza-Shop-62c5666869be0b672caea8e3)
 
 ### Payment
 The Payment table is utilized to store metadata related to payment transactions processed through Stripe. Each payment is linked to a user and an order.
@@ -27,14 +28,18 @@ The application's cart mechanism operates through the utilization of the `is_ord
 This project offers various authentication methods, including:
 
 1. Email and Password Authentication
-2. Google OAuth
-3. GitHub OAuth
-4. Facebook OAuth
+2. [Google OAuth](https://docs.allauth.org/en/latest/socialaccount/providers/google.html#app-registration)
+3. [GitHub OAuth](https://docs.allauth.org/en/latest/socialaccount/providers/github.html)
+4. [Facebook OAuth](https://docs.allauth.org/en/latest/socialaccount/providers/facebook.html)
 
 Social authentication features are facilitated by the [django-allauth](https://github.com/pennersr/django-allauth) provider.
 
+Here's the database schema for the social authentication:
+
+[![Database Schema](/docs/social-auth.svg 'Pizza Shop Database Schema')](https://dbdiagram.io/d/Pizza-Shop-62c5666869be0b672caea8e3)
+
 ## Payment
-This project utilizes Stripe to collect credit card payments from users for their orders, leveraging Stripe's Python SDK.
+This project utilizes Stripe to collect credit card payments from users for their orders, leveraging [Stripe's Python SDK](https://github.com/stripe/stripe-python).
 
 ## Google Places Integration
 The application is equipped with [Google Places library](https://developers.google.com/places/) to assist users in entering accurate address details. This feature presents users with an autocomplete input, allowing them to select their address from a list of verified options provided by Google. This integration aims to mitigate delivery issues caused by inaccurate addresses.
