@@ -5,7 +5,7 @@ To deploy the project to a production environment, utilize our Docker Compose se
 Begin by cloning the project repository onto your server using the following command:
 
 ```bash
-git clone https://github.com/user-name/repo-name.git
+git clone https://github.com/udit-001/pizzashop.git
 ```
 
 Navigate to the project directory:
