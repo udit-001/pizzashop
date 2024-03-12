@@ -26,7 +26,7 @@ For additional insights into the system design of this application, please refer
 
     - [Google OAuth](https://docs.allauth.org/en/latest/socialaccount/providers/google.html#app-registration): This feature is readily available and uses demo credentials configured within the app. If you wish to use your own credentials, modify the Google App entry at the following link: `http://localhost:8000/admin/socialaccount/socialapp/`.
 
-    - Facebook OAuth: Out-of-the-box functionality is not provided for Facebook Authentication. However, you can refer to the [django-allauth docs](https://docs.allauth.org/en/latest/socialaccount/providers/facebook.html) and follow the steps to add a social app through the following link: `http://localhost:8000/admin/socialaccount/socialapp/add/`
+    - [Facebook OAuth](https://docs.allauth.org/en/latest/socialaccount/providers/facebook.html): Out-of-the-box functionality is not provided for Facebook Authentication. However, you can refer to the [django-allauth docs](https://docs.allauth.org/en/latest/socialaccount/providers/facebook.html) and follow the steps to add a social app through the following link: `http://localhost:8000/admin/socialaccount/socialapp/add/`
 
     - [GitHub OAuth](https://docs.allauth.org/en/latest/socialaccount/providers/github.html): Similar to Facebook Authentication, GitHub Authentication requires configuration and does not work automatically. Follow the instructions in the [django-allauth docs](https://docs.allauth.org/en/latest/socialaccount/providers/github.html) to add an entry here: `http://localhost:8000/admin/socialaccount/socialapp/add/`.
 
