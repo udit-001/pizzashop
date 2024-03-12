@@ -54,7 +54,7 @@ For additional insights into the system design of this application, please refer
 5. **Google reCAPTCHA**: By default, the project uses Google's testing keys when in development mode.
 
 
-## Deploying the Project:
+## Deploying the Project
 For instructions on deploying this project in a production environment, kindly consult our [deployment guide.](/docs/deployment.md)
 
 ## Technical Details
