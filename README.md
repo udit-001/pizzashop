@@ -96,6 +96,7 @@ Adjust the values for the following settings in the newly created .env file:
 
 - `ALLOWED_HOSTS` : Specify the domain of the server to make the app accessible. Refer to [this section](https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts) in the Django documentation for further details.
 - `SECRET_KEY` : Assign a unique and unpredictable value. Utilize a [Django secret key generator](https://djecrety.ir/) for assistance. The `SECRET_KEY` is crucial for various security purposes in Django, as explained in the [documentation](https://docs.djangoproject.com/en/dev/ref/settings/#secret-key).
+- `DEBUG` : Ensure this variable is set to False. Debug mode should never be enabled in a production environment. For further details, refer to [this section](https://docs.djangoproject.com/en/dev/ref/settings/#std-setting-DEBUG) of the Django docs.
 
 
 ### Step 4: Setup a reCAPTCHA Site
