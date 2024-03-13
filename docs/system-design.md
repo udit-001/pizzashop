@@ -1,3 +1,7 @@
+## Application Architecture
+![arch](/docs/app-arch.svg)
+
+
 ## Database Schema
 Here is the database schema employed within the application:
 
