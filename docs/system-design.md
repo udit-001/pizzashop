@@ -39,7 +39,7 @@ Here's the database schema for the social authentication:
 [![Database Schema](/docs/social-auth.svg 'Pizza Shop Database Schema')](https://dbdiagram.io/d/Pizza-Shop-62c5666869be0b672caea8e3)
 
 ## Payment
-This project utilizes Stripe to collect credit card payments from users for their orders, leveraging [Stripe's Python SDK](https://github.com/stripe/stripe-python).
+This project utilizes Stripe to collect credit card payments from users for their orders, leveraging [Stripe's Python SDK](https://github.com/stripe/stripe-python). Subsequently, we retain the transaction details in our database for reference, as demonstrated [here.](#payment)
 
 ## Google Places Integration
 The application is equipped with [Google Places library](https://developers.google.com/places/) to assist users in entering accurate address details. This feature presents users with an autocomplete input, allowing them to select their address from a list of verified options provided by Google. This integration aims to mitigate delivery issues caused by inaccurate addresses.
@@ -56,3 +56,5 @@ In our project, we have prioritized security by storing all sensitive project se
 To fortify our system against automated attacks, we have integrated a security feature using the [django-reCAPTCHA](https://github.com/praekelt/django-recaptcha) library. This library serves as a defense mechanism, helping us distinguish between human users and automated bots, thus adding an additional layer of protection.
 
 When someone interacts with our system, especially during sensitive actions like login or registration form submissions, reCAPTCHA steps in.
+
+Specifically, the project utilizes [ReCaptchaV2Invisible](https://developers.google.com/recaptcha/docs/invisible), which monitors user behavior instead of requiring the user to solve a challenge.
