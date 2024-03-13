@@ -34,7 +34,7 @@ For additional insights into the system design of this application, please refer
 1. **Run using Docker Compose**: Ensure you have Docker Compose installed on your system. Navigate to the project's root directory and run the following command to build and start the application and its services:
 
    ```
-   docker compose up -d
+   docker compose up -f local.yaml -d
    ```
 
 2. **Access the Application**: After successfully launching the containers, you can access the application in your web browser at http://localhost:8000
