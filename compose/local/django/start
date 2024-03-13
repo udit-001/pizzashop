@@ -7,4 +7,4 @@ set -o nounset
 
 python /app/manage.py migrate
 python /app/manage.py loaddata init
-gunicorn --bind 0.0.0.0:8000 --log-level DEBUG pizzashop.wsgi:application
+python /app/manage.py runserver 0.0.0.0:8000

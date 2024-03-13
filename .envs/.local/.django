@@ -1,0 +1,11 @@
+SECRET_KEY=secret-key
+DEBUG=True
+ALLOWED_HOSTS=localhost
+DATABASE_URL=postgres://postgres:postgres@db:5432/pizzitalia
+SENDGRID_API=haha
+RECAPTCHA_PUBLIC=public-key
+RECAPTCHA_PRIVATE=private-key
+STRIPE_KEY=stripe-key
+PLACES_API_KEY=AIzaSyCPNm1C3d-T9z8rd_dj_kjsCpxeWpahOEw
+DEFAULT_FROM_EMAIL=mail@example.com
+DJANGO_SETTINGS_MODULE=pizzashop.settings.local

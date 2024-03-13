@@ -6,8 +6,6 @@ import environ
 env = environ.Env(
 )
 
-env.read_env()
-
 BASE_DIR = os.path.dirname(os.path.dirname(
     os.path.dirname(os.path.abspath(__file__))))
 
@@ -20,20 +18,27 @@ ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
 
 
 # Application definition
-INSTALLED_APPS = [
+
+DJANGO_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+]
+
+LOCAL_APPS = [
     'menu',
     'accounts',
     'pages',
     'orders',
     'addresses',
-    # Allauth
-    'django.contrib.sites',
+]
+
+
+THIRD_PARTY_APPS = [
     'captcha',
     'allauth',
     'allauth.account',
@@ -41,12 +46,12 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.github',
     'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.google',
-    'django_extensions',
 ]
+
+INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -121,7 +126,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
@@ -142,20 +146,10 @@ ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_SIGNUP_FORM_CLASS = 'accounts.forms.SignupForm'
 ACCOUNT_ADAPTER = 'accounts.forms.RestrictEmailAdapter'
 
-
-# For making allauth work without setting up an smtp server
-# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-# Email Settings
-EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_PORT = '587'
-EMAIL_HOST_USER = 'apikey'
-EMAIL_HOST_PASSWORD = env('SENDGRID_API')
-EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = 'no-reply@pizzitalia.herokuapp.com'
-
 # Recaptcha
-RECAPTCHA_PUBLIC_KEY = env('RECAPTCHA_PUBLIC')
-RECAPTCHA_PRIVATE_KEY = env('RECAPTCHA_PRIVATE')
+RECAPTCHA_PUBLIC_KEY = env('RECAPTCHA_PUBLIC', default=None)
+RECAPTCHA_PRIVATE_KEY = env('RECAPTCHA_PRIVATE', default=None)
 
 # STRIPE
 STRIPE_KEY = env('STRIPE_KEY')
+PLACES_API_KEY = env('PLACES_API_KEY')

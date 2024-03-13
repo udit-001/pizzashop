@@ -18,10 +18,10 @@ RUN apt-get update \
 
 RUN pip install --upgrade pip
 
-COPY ./src/requirements.txt /requirements.txt
-RUN pip install -r /requirements.txt
+COPY ./requirements .
+RUN pip install -r production.txt
 
-COPY ./compose/start /start
+COPY ./compose/production/django/start /start
 RUN sed -i 's/\r$//g' /start
 RUN chmod +x /start
 
